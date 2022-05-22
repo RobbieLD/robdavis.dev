@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkui_robdavis_dev"]=self["webpackChunkui_robdavis_dev"]||[]).push([[443],{4335:function(n,u,a){a.r(u),a.d(u,{default:function(){return v}});var e=a(3396);const r={class:"about"},s=(0,e._)("h1",null,"This is an about page",-1),i=[s];function t(n,u){return(0,e.wg)(),(0,e.iD)("div",r,i)}var c=a(89);const o={},d=(0,c.Z)(o,[["render",t]]);var v=d}}]);
+//# sourceMappingURL=about.deb71664.js.map
