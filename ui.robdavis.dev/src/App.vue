@@ -1,30 +1,44 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <router-view />
 </template>
+<script lang="ts">
+    import { defineComponent, onMounted } from 'vue'
+    import { useStore } from 'vuex'
+    import { storeKey } from './store'
 
+    export default defineComponent({
+        name: 'App',
+        setup() {
+
+            const store = useStore(storeKey)
+            onMounted(() => {
+                // TODO: Handle error and add more initialisation code here
+                Promise.all([store.dispatch('loadGitHubUser')])
+            })
+        }
+    })
+</script>
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    :root {
+        --primary-color: #123456;
+        --secondary-color: #c6538c;
+        --primary-color-text: white;
+        --secondary-color-text: white;
     }
-  }
-}
+
+    html,
+    body {
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+  #app {
+      display: grid;
+      height: 100%;
+      grid-template-columns: 25em 1fr;
+      border-left: var(--secondary-color) 2em solid;
+    }
 </style>
