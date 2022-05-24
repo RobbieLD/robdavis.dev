@@ -12,7 +12,8 @@ export const store = createStore<State>({
   state: {
       githubUser: {} as GitHubUser,
       profileDetails: {} as ProfileDetails,
-      socials: []
+      socials: [],
+      skills: []
   },
   getters: {
   },
@@ -27,6 +28,10 @@ export const store = createStore<State>({
 
       setSocials: (state, socials): void => {
           state.socials = socials
+      },
+
+      setSkills: (state, skills): void => {
+          state.skills = skills
       }
   },
   actions: {
@@ -46,6 +51,12 @@ export const store = createStore<State>({
           const service = new ProfileService()
           const socials = await service.Socials()
           commit('setSocials', socials)
+      },
+
+      loadSkills: async ({ commit }): Promise<void> => {
+          const service = new ProfileService()
+          const skills = await service.Skills()
+          commit('setSkills', skills)
       }
   },
   modules: {

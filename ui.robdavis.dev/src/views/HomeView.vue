@@ -2,6 +2,7 @@
 	<div class="side-bar">
 		<profile-avatar></profile-avatar>
 		<social-media></social-media>
+        <skill-set></skill-set>
 	</div>
 	<div class="main-content">content</div>
 </template>
@@ -10,12 +11,14 @@
     import { defineComponent } from 'vue'
     import ProfileAvatar from '@/components/ProfileAvatar.vue'
     import SocialMedia from '@/components/SocialMedia.vue'
+    import SkillSet from '@/components/SkillSet.vue'
 
     export default defineComponent({
         name: 'HomeView',
         components: {
             ProfileAvatar,
-            SocialMedia
+            SocialMedia,
+            SkillSet
         }
     })
 </script>

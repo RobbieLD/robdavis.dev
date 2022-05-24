@@ -18,6 +18,9 @@
     "Level": {
       "type": "integer",
       "max": 5
+    },
+    "Order": {
+      "type": "integer"
     }
   }
 }

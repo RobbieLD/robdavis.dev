@@ -6,7 +6,8 @@
                 <font-awesome-icon :icon="[social.Library, social.Icon]" class="link-row__icon--symbol" transform="shrink-7" />
             </font-awesome-layers>
             <div class="link-row__text">
-                <a class="link-row__anchor" :href="social.Link" target="_blank">{{ social.Name }}</a>
+                <a class="link-row__anchor link-row__anchor--screen" :href="social.Link" target="_blank">{{ social.Name }}</a>
+                <div class="link-row__anchor--print">{{ social.Link }}</div>
             </div>
         </div>
     </div>
@@ -56,6 +57,10 @@
             &:hover {
                 color: var(--secondary-color);
             }
+
+            &--print {
+                display: none;
+            }
         }
 
         &__icon {
@@ -66,5 +71,16 @@
                 color: var(--secondary-color-text);
             }
         }
+    }
+
+    @media print {
+        .link-row__anchor--print {
+            display: initial;
+        }
+
+        .link-row__anchor--screen {
+            display: none;
+        }
+
     }
 </style>

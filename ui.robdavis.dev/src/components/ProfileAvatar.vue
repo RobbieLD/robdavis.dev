@@ -57,7 +57,7 @@
 
         &__divider {
             height: 0.05em;
-            width: 20em;
+            width: 18em;
             background: var(--primary-color-text);
             background: linear-gradient(90deg, var(--primary-color-text-transparent) 0%, var(--primary-color-text) 20%, var(--primary-color-text) 80%, var(--primary-color-text-transparent) 100%);
         }
