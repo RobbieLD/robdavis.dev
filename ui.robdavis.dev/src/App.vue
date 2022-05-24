@@ -12,8 +12,11 @@
 
             const store = useStore(storeKey)
             onMounted(() => {
-                // TODO: Handle error and add more initialisation code here
-                Promise.all([store.dispatch('loadGitHubUser')])
+                // TODO: Handle errors
+                Promise.all([
+                    store.dispatch('loadGitHubUser'),
+                    store.dispatch('loadProfile'),
+                    store.dispatch('loadSocials')])
             })
         }
     })
@@ -21,9 +24,10 @@
 <style lang="scss">
     :root {
         --primary-color: #123456;
-        --secondary-color: #c6538c;
-        --primary-color-text: white;
-        --secondary-color-text: white;
+        --secondary-color: #c5508a;
+        --primary-color-text: rgb(255, 255, 255);
+        --secondary-color-text: rgb(255, 255, 255);
+        --primary-color-text-transparent: rgba(255, 255, 255, 0);
     }
 
     html,

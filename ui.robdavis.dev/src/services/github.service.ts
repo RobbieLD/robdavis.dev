@@ -2,7 +2,7 @@
 import GitHubUser from '@/models/github-user'
 import BaseService from './base.service'
 
-export default class MovieService extends BaseService {
+export default class GitHubService extends BaseService {
     constructor() {
         super('https://api.github.com/users/')
     }

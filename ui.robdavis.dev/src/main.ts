@@ -4,10 +4,10 @@ import router from './router'
 import { store, storeKey } from './store'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPhone, faCircle } from '@fortawesome/free-solid-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faPhone)
-library.add(faCircle)
+library.add(fas, fab)
 
 createApp(App)
     .use(store, storeKey)

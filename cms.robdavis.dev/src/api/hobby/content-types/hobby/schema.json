@@ -17,6 +17,9 @@
     },
     "Icon": {
       "type": "string"
+    },
+    "Library": {
+      "type": "string"
     }
   }
 }

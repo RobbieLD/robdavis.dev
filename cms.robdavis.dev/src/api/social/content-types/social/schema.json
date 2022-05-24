@@ -4,7 +4,8 @@
   "info": {
     "singularName": "social",
     "pluralName": "socials",
-    "displayName": "Social"
+    "displayName": "Social",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,6 +19,9 @@
       "type": "string"
     },
     "Icon": {
+      "type": "string"
+    },
+    "Library": {
       "type": "string"
     }
   }

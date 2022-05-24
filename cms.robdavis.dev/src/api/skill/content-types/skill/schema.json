@@ -15,15 +15,9 @@
     "Name": {
       "type": "string"
     },
-    "Rating": {
-      "type": "enumeration",
-      "enum": [
-        "One",
-        "Two",
-        "Three",
-        "Four",
-        "Five"
-      ]
+    "Level": {
+      "type": "integer",
+      "max": 5
     }
   }
 }

@@ -1,23 +1,34 @@
 <template>
     <div class="social-media">
-        <div class="link-row">
+        <div class="link-row" v-for="(social, index) in socials" :key="index">
             <font-awesome-layers class="link-row__icon">
                 <font-awesome-icon icon="circle" />
-                <font-awesome-icon icon="phone" class="link-row__icon--symbol" transform="shrink-7" />
+                <font-awesome-icon :icon="[social.Library, social.Icon]" class="link-row__icon--symbol" transform="shrink-7" />
             </font-awesome-layers>
             <div class="link-row__text">
-                <a class="link-row__anchor" href="mailto:robert.lyndon.davis@gmail.com" target="_blank">robert.lyndon.davis@gmail.com</a>
+                <a class="link-row__anchor" :href="social.Link" target="_blank">{{ social.Name }}</a>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
+    import { storeKey } from '@/store'
+    import { computed, defineComponent } from 'vue'
+    import { useStore } from 'vuex'
 
     export default defineComponent({
         name: 'SocialMedia',
         components: {
+        },
+        setup() {
+            const store = useStore(storeKey)
+
+            const socials = computed(() => store.state.socials)
+            
+            return {
+                socials
+            }
         }
     })
 </script>
@@ -31,6 +42,7 @@
         display: grid;
         grid-auto-flow: column;
         grid-template-columns: min-content;
+        margin-bottom: 0.5em;
 
         &__text {
             align-self: center;
@@ -47,7 +59,7 @@
         }
 
         &__icon {
-            font-size: 2em;
+            font-size: 1.5em;
             color: var(--secondary-color);
 
             &--symbol {

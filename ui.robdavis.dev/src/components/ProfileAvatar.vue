@@ -1,8 +1,9 @@
 <template>
     <div class="profile">
         <img class="profile__avatar" :src="url" alt="avatar">
-        <div class="profile__name">ROB DAVIS</div>
-        <div class="profile__title">Software Engineer</div>
+        <div class="profile__name">{{ details.FirstName }} {{ details.LastName }}</div>
+        <div class="profile__divider"></div>
+        <div class="profile__title">{{ details.Title }}</div>
     </div>
 </template>
 
@@ -18,9 +19,11 @@
             const store = useStore(storeKey)
 
             const url = computed(() => store.state.githubUser.avatar_url)
+            const details = computed(() => store.state.profileDetails)
 
             return {
-                url
+                url,
+                details
             }
         }
     })
@@ -50,7 +53,13 @@
             font-style: italic;
             font-size: 1.5em;
             padding-top: 0.2em;
-            border-top: solid 0.05em var(--primary-color-text);
+        }
+
+        &__divider {
+            height: 0.05em;
+            width: 20em;
+            background: var(--primary-color-text);
+            background: linear-gradient(90deg, var(--primary-color-text-transparent) 0%, var(--primary-color-text) 20%, var(--primary-color-text) 80%, var(--primary-color-text-transparent) 100%);
         }
     }
 </style>
