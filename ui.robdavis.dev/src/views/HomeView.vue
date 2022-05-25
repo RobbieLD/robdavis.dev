@@ -10,7 +10,7 @@
             {{ profile.About }}
         </content-section>
         <content-section icon="computer" caption="Roles">
-            TBA
+            <roles-history></roles-history>
         </content-section>
     </div>
 </template>
@@ -21,6 +21,7 @@
     import SkillSet from '@/components/SkillSet.vue'
     import HobbyCollection from '@/components/HobbyCollection.vue'
     import ContentSection from '@/components/ContentSection.vue'
+    import RolesHistory from '@/components/RolesHistory.vue'
     import { storeKey } from '@/store'
     import { computed, defineComponent } from 'vue'
     import { useStore } from 'vuex'
@@ -32,7 +33,8 @@
             SocialMedia,
             SkillSet,
             HobbyCollection,
-            ContentSection
+            ContentSection,
+            RolesHistory
         },
         setup() {
             const store = useStore(storeKey)

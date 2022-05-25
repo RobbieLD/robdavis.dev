@@ -18,7 +18,8 @@
                     store.dispatch('loadProfile'),
                     store.dispatch('loadSocials'),
                     store.dispatch('loadSkills'),
-                    store.dispatch('loadHobbies')])
+                    store.dispatch('loadHobbies'),
+                    store.dispatch('loadJobs')])
             })
         }
     })
@@ -30,6 +31,8 @@
         --primary-color-text: rgb(255, 255, 255) !important;
         --secondary-color-text: rgb(255, 255, 255) !important;
         --primary-color-text-transparent: rgba(255, 255, 255, 0) !important;
+        --dark-grey: #646464;
+        --light-grey: rgb(153, 153, 153);
     }
 
     html,
