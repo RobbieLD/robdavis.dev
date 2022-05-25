@@ -18,8 +18,8 @@
     "Icon": {
       "type": "string"
     },
-    "Library": {
-      "type": "string"
+    "Wide": {
+      "type": "boolean"
     }
   }
 }

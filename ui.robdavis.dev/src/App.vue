@@ -17,7 +17,8 @@
                     store.dispatch('loadGitHubUser'),
                     store.dispatch('loadProfile'),
                     store.dispatch('loadSocials'),
-                    store.dispatch('loadSkills')])
+                    store.dispatch('loadSkills'),
+                    store.dispatch('loadHobbies')])
             })
         }
     })
