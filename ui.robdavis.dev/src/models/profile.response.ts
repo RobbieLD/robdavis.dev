@@ -6,7 +6,7 @@ export interface BaseResponseCollection<T> {
     data: BaseResponseData<T>[]
 }
 
-interface BaseResponseData<T> {
+export interface BaseResponseData<T> {
     id: number,
     attributes: T
 }

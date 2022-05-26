@@ -2,13 +2,7 @@
     <div class="roles">
         <Timeline :value="jobs" align="alternate" class="roles__timeline">
             <template #marker="slotProps">
-            <div class="roles__marker--border">
-
-            
-                <span class="roles__marker">
-                    <img :src="slotProps.item.Logo.url" :alt="slotProps.item.Logo.alternativeText" class="roles__marker--image">
-                </span>
-                </div>
+                <img :src="slotProps.item.Logo.url" :alt="slotProps.item.Logo.alternativeText" class="roles__marker">
             </template>
             <template #content="slotProps">
                 <div>
@@ -17,12 +11,15 @@
                             {{ slotProps.item.Company }}
                         </span>
                         <span class="roles__years">
-                            {{slotProps.item.Start}} - {{ slotProps.item.End}}
+                            {{slotProps.item.Start}} - {{ slotProps.item.End || 'Present'}}
                         </span>
                     </div>
                     <div class="roles__description">
-                        <span class="roles__role">{{ slotProps.item.Role }}:</span>
-                        {{ slotProps.item.Description }}
+                        <span class="roles__role">{{ slotProps.item.Role }}: </span>
+                        <span v-html="slotProps.item.Description"></span>
+                    </div>
+                    <div class="roles__techs">
+                        <img v-for="(tech, index) of slotProps.item.Technologies" :key="index" :src="tech.url" :title="tech.alternativeText" :alt="tech.alternativeText" class="roles__tech"/>
                     </div>
                 </div>
             </template>
@@ -61,17 +58,8 @@
             justify-content: center;
             border-radius: 50%;
             z-index: 1;
-            background-color: var(--secondary-color);
-
-            &--image {
-                width: 4em;
-            }
-
-            &--border {
-                border: solid 0.2em var(--primary-color);
-                border-radius: 50%;
-                padding: 5px;
-            }
+            padding: 0.2em;
+            box-shadow: 0px 0px 3px 2px #88888852;
         }
 
         &__title {
@@ -94,6 +82,15 @@
         &__role {
             font-weight: 500;
         }
+
+        &__techs {
+            margin-top: 0.5em;
+        }
+
+        &__tech {
+            width: 1.5em;
+            margin-right: 0.2em;
+        }
     }
 
     ::v-deep(.p-timeline-event-content)
@@ -101,8 +98,8 @@
         line-height: 1;
     }
 
-    @media screen and (max-width: 960px) {
-        ::v-deep(.roles__timeline) {
+    @media (max-width: 960px) {
+        .roles__timeline {
             .p-timeline-event:nth-child(even) {
                 flex-direction: row !important;
                 

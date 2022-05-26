@@ -4,7 +4,6 @@ import Job from '@/models/job'
 import ProfileDetails from '@/models/profile.details'
 import Skill from '@/models/skill'
 import Social from '@/models/social'
-import Image from '@/models/image'
 
 export default interface State {
     githubUser: GitHubUser,
@@ -12,5 +11,5 @@ export default interface State {
     socials: Social[],
     skills: Skill[],
     hobbies: Hobby[],
-    jobs: Job<Image>[]
+    jobs: Job[]
 }

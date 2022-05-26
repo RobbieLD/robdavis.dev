@@ -44,9 +44,13 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
+    @page {
+        size: auto;
+        margin: 0;
+    }
+
   #app {
       display: grid;
-      height: 100%;
       grid-template-columns: 22em 1fr;
       border-left: var(--secondary-color) 2em solid;
     }
