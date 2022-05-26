@@ -49,9 +49,8 @@
         &__icon {
             font-size: 2.5em;
             color: var(--secondary-color);
-            border: 0.07em var(--primary-color) solid;
             border-radius: 50%;
-            padding: 0.6em;
+            box-shadow: 0px 0px 3px 2px #88888852;
 
             &--symbol {
                 color: var(--secondary-color-text);

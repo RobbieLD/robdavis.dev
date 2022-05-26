@@ -19,7 +19,8 @@
                     store.dispatch('loadSocials'),
                     store.dispatch('loadSkills'),
                     store.dispatch('loadHobbies'),
-                    store.dispatch('loadJobs')])
+                    store.dispatch('loadJobs'),
+                    store.dispatch('loadCerts')])
             })
         }
     })

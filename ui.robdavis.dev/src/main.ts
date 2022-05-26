@@ -7,6 +7,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import PrimeVue from 'primevue/config'
+import BadgeDirective from 'primevue/badgedirective'
 
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
@@ -18,6 +19,7 @@ createApp(App)
     .use(store, storeKey)
     .use(router)
     .use(PrimeVue)
+    .directive('badge', BadgeDirective)
     .component('font-awesome-icon', FontAwesomeIcon)
     .component('font-awesome-layers', FontAwesomeLayers)
     .mount('#app')
