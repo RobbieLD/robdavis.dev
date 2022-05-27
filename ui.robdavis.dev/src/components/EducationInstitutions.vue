@@ -1,10 +1,12 @@
 <template>
     <div class="educations">
         <div v-for="(ed, index) of eds" :key="index" class="educations__row">
-            <Chip :label="ed.Institute" :image="ed.Logo.url" />
-            <!-- <img :src="ed.Logo.url" :alt="ed.Logo.alternativeText" class="educations__logo" />
-            <span>{{ ed.Institute }}</span>| <span>{{ ed.Name }}</span>
-            <span>{{ ed.Year }}</span> -->
+            <img :src="ed.Logo.url" :alt="ed.Logo.alternativeText" class="educations__logo" />
+            <div class="educations__details">
+                <span class="educations__name">{{ ed.Name }}</span>
+                <span class="educations__institute">{{ ed.Institute }}</span>
+                <span class="educations__year">{{ ed.Year }}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -13,13 +15,10 @@
     import { storeKey } from '@/store'
     import { computed, defineComponent } from 'vue'
     import { useStore } from 'vuex'
-    import Chip from 'primevue/chip'
 
     export default defineComponent({
         name: 'EducationInstitution',
-        components: {
-            Chip
-        },
+        components: {},
         setup() {
             const store = useStore(storeKey)
             const eds = computed(() => store.state.educations)
@@ -32,14 +31,36 @@
 </script>
 <style lang="scss">
     .educations {
+        &__institue {
+            font-variant: small-caps;
+        }
+
+        &__name {
+            font-weight: 500;
+        }
+
+        &__year {
+            color: var(--light-grey);
+        }
 
         &__row {
             margin-bottom: 0.5em;
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-columns: min-content;
+            margin-right: 1em;
         }
 
         &__logo {
             border-radius: 50%;
             width: 5em;
+        }
+
+        &__details {
+            display: grid;
+            grid-auto-flow: row;
+            border-left: solid 2px var(--primary-color);
+            padding-left: 0.5em;
         }
     }
 </style>

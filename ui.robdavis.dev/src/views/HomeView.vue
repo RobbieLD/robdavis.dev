@@ -67,5 +67,6 @@
 
     .main-content {
         grid-column: 2;
+        margin-top: 2em;
     }
 </style>
