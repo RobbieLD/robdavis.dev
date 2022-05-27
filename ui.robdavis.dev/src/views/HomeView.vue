@@ -3,13 +3,14 @@
 		<profile-avatar></profile-avatar>
 		<social-media></social-media>
         <skill-set></skill-set>
+        <certifications-table></certifications-table>
 	</div>
 	<div class="main-content">
         <content-section icon="comment" caption="Introduction">
             {{ profile.About }}
         </content-section>
-        <content-section icon="certificate" caption="Certifications">
-            <certifications-table></certifications-table>
+        <content-section icon="user-graduate" caption="Education">
+            <education-institutions></education-institutions>
         </content-section>
         <content-section icon="camera" caption="Hobbies">
             <hobby-collection></hobby-collection>
@@ -30,6 +31,7 @@
     import HobbyCollection from '@/components/HobbyCollection.vue'
     import ContentSection from '@/components/ContentSection.vue'
     import RolesHistory from '@/components/RolesHistory.vue'
+    import EducationInstitutions from '@/components/EducationInstitutions.vue'
     import CertificationsTable from '@/components/CertificationsTable.vue'
     import { storeKey } from '@/store'
     import { computed, defineComponent } from 'vue'
@@ -43,7 +45,8 @@
             SkillSet,
             HobbyCollection,
             ContentSection,
-            CertificationsTable
+            CertificationsTable,
+            EducationInstitutions
             //RolesHistory
         },
         setup() {

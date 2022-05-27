@@ -32,7 +32,7 @@
     .profile {
         display: grid;
         justify-items: center;
-        margin-top: 3em;
+        margin-top: 2em;
 
         &__avatar {
             width: 15em;

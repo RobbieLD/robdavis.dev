@@ -1,4 +1,5 @@
 import { Certification } from '@/models/certification'
+import { Education } from '@/models/education'
 import GitHubUser from '@/models/github-user'
 import Hobby from '@/models/hobby'
 import Job from '@/models/job'
@@ -13,5 +14,6 @@ export default interface State {
     skills: Skill[],
     hobbies: Hobby[],
     jobs: Job[],
-    certifications: Certification[]
+    certifications: Certification[],
+    educations: Education[]
 }

@@ -20,7 +20,8 @@
                     store.dispatch('loadSkills'),
                     store.dispatch('loadHobbies'),
                     store.dispatch('loadJobs'),
-                    store.dispatch('loadCerts')])
+                    store.dispatch('loadCerts'),
+                    store.dispatch('loadEducations')])
             })
         }
     })
@@ -34,6 +35,7 @@
         --primary-color-text-transparent: rgba(255, 255, 255, 0) !important;
         --dark-grey: #646464;
         --light-grey: rgb(153, 153, 153);
+        --very-light-grey: rgb(230, 230, 230);
     }
 
     html,
@@ -46,8 +48,15 @@
     }
 
     @page {
-        size: auto;
+        size: a4;
         margin: 0;
+    }
+
+    @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;
+        }
     }
 
   #app {
