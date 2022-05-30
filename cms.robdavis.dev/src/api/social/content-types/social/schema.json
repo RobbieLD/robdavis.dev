@@ -26,6 +26,9 @@
     },
     "Order": {
       "type": "integer"
+    },
+    "PrintLink": {
+      "type": "string"
     }
   }
 }

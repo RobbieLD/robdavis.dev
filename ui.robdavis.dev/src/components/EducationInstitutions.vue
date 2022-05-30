@@ -31,6 +31,11 @@
 </script>
 <style lang="scss">
     .educations {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        
         &__institue {
             font-variant: small-caps;
         }

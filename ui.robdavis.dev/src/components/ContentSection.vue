@@ -29,9 +29,13 @@
 <style lang="scss">
     .content-section {
         margin-left: 2em; 
-        margin-top: 0.5em;
+        margin-top: 5em;
         margin-bottom: 2em;
         margin-right: 2.5em;
+
+        &:first-of-type {
+            margin-top:0.5em;
+        }
 
         &__heading {
             display: grid;
@@ -55,6 +59,12 @@
             &--symbol {
                 color: var(--secondary-color-text);
             }
+        }
+    }
+
+    @media print {
+        .content-section {
+            margin-top: 0.5em;
         }
     }
 

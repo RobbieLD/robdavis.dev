@@ -4,4 +4,5 @@ export default interface Social {
     Icon: string,
     Library: string,
     Order: number,
+    PrintLink: string
 }

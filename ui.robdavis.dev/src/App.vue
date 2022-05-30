@@ -5,14 +5,15 @@
     import { defineComponent, onMounted } from 'vue'
     import { useStore } from 'vuex'
     import { storeKey } from './store'
+    import { useToast } from 'primevue/usetoast'
 
     export default defineComponent({
         name: 'App',
         setup() {
-
+            const toast = useToast()
             const store = useStore(storeKey)
+
             onMounted(() => {
-                // TODO: Handle errors
                 Promise.all([
                     store.dispatch('loadGitHubUser'),
                     store.dispatch('loadProfile'),
@@ -22,6 +23,9 @@
                     store.dispatch('loadJobs'),
                     store.dispatch('loadCerts'),
                     store.dispatch('loadEducations')])
+                    .catch((e: Error) => {
+                        toast.add({severity:'error', summary: e.name, detail:e.message, life: 3000})
+                    })
             })
         }
     })
@@ -47,9 +51,15 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
+    * {
+        color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
     @page {
-        size: a4;
-        margin: 0;
+        size: A4 portrait;
+        margin: 0px;
     }
 
     @media print {

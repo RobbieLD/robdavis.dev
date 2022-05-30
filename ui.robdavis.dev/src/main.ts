@@ -7,8 +7,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import PrimeVue from 'primevue/config'
+import ToastService from 'primevue/toastservice'
 import BadgeDirective from 'primevue/badgedirective'
-
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import 'primevue/resources/themes/saga-blue/theme.css'
@@ -19,6 +19,7 @@ createApp(App)
     .use(store, storeKey)
     .use(router)
     .use(PrimeVue)
+    .use(ToastService)
     .directive('badge', BadgeDirective)
     .component('font-awesome-icon', FontAwesomeIcon)
     .component('font-awesome-layers', FontAwesomeLayers)

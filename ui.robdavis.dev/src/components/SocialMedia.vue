@@ -7,7 +7,7 @@
             </font-awesome-layers>
             <div class="link-row__text">
                 <a class="link-row__anchor link-row__anchor--screen" :href="social.Link" target="_blank">{{ social.Name }}</a>
-                <div class="link-row__anchor--print">{{ social.Link }}</div>
+                <div class="link-row__anchor link-row__anchor--print">{{ social.PrintLink }}</div>
             </div>
         </div>
     </div>
