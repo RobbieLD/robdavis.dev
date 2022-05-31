@@ -15,8 +15,9 @@
         </content-section>
         <content-section icon="camera" caption="Hobbies" class="page__one">
             <hobby-collection></hobby-collection>
+            <!-- <div class="history">Employment history on the following page</div> -->
         </content-section>
-        <content-section icon="building" caption="Roles">
+        <content-section icon="building" class="page__two" caption="Roles">
             <roles-history></roles-history>
         </content-section>
     </div>
@@ -126,8 +127,33 @@
     .side-bar {
         grid-column: 1;
         background-color: var(--primary-color);
-        height: 100%;
+        height: 100vh;
         position: fixed;
+    }
+
+    .history {
+        display: none;
+        font-size: 0.8em;
+        font-style: italic;
+        text-align: center;
+    }
+
+    @media print {
+        .side-bar {
+            position: initial;
+        }
+
+        .history {
+            display: initial;
+        }
+
+        .page__two {
+            margin-left: -25em;
+        }
+
+        .page__two .content-section__heading {
+            display: none;
+        }
     }
 
     .main-content {

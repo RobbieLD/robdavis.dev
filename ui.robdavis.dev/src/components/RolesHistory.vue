@@ -5,22 +5,20 @@
                 <img :src="slotProps.item.Logo.url" :alt="slotProps.item.Logo.alternativeText" class="roles__marker">
             </template>
             <template #content="slotProps">
-                <div>
-                    <div>
-                        <span class="roles__title">
-                            {{ slotProps.item.Company }}
-                        </span>
-                        <span class="roles__years">
-                            {{slotProps.item.Start}} - {{ slotProps.item.End || 'Present'}}
-                        </span>
-                    </div>
-                    <div class="roles__description">
-                        <span class="roles__role">{{ slotProps.item.Role }}: </span>
-                        <span v-html="slotProps.item.Description"></span>
-                    </div>
-                    <div class="roles__techs">
-                        <img v-for="(tech, index) of slotProps.item.Technologies" :key="index" :src="tech.url" :title="tech.alternativeText" :alt="tech.alternativeText" class="roles__tech"/>
-                    </div>
+                <div class="roles__container">
+                    <span class="roles__title">
+                        {{ slotProps.item.Company }}
+                    </span>
+                    <span class="roles__years">
+                        {{slotProps.item.Start}} - {{ slotProps.item.End || 'Present'}}
+                    </span>
+                </div>
+                <div class="roles__description">
+                    <span class="roles__role">{{ slotProps.item.Role }}: </span>
+                    <span v-html="slotProps.item.Description"></span>
+                </div>
+                <div class="roles__techs">
+                    <img v-for="(tech, index) of slotProps.item.Technologies" :key="index" :src="tech.url" :title="tech.alternativeText" :alt="tech.alternativeText" class="roles__tech"/>
                 </div>
             </template>
         </Timeline>
@@ -60,6 +58,10 @@
             z-index: 1;
             padding: 0.2em;
             box-shadow: 0px 0px 3px 2px #88888852;
+        }
+
+        &__container {
+            margin-top: 1em;
         }
 
         &__title {
