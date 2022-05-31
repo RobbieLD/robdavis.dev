@@ -6,16 +6,18 @@
         <certifications-table></certifications-table>
 	</div>
 	<div class="main-content">
-        <Terminal welcomeMessage="Welcome to admin mode" prompt="admin > " v-if="showTerminal" class="terminal" />
+        <Terminal welcomeMessage="Welcome to admin mode" :prompt="prompt" v-if="showTerminal" class="terminal" />
         <content-section icon="comment" caption="Introduction">
             {{ profile.About }}
         </content-section>
         <content-section icon="user-graduate" caption="Education">
             <education-institutions></education-institutions>
         </content-section>
-        <content-section icon="camera" caption="Hobbies" class="page__one">
+        <content-section icon="camera" caption="Hobbies">
             <hobby-collection></hobby-collection>
-            <!-- <div class="history">Employment history on the following page</div> -->
+        </content-section>
+        <content-section icon="address-book" caption="References" class="page__one">
+            <reference-list></reference-list>
         </content-section>
         <content-section icon="building" class="page__two" caption="Roles">
             <roles-history></roles-history>
@@ -40,6 +42,7 @@
     import EducationInstitutions from '@/components/EducationInstitutions.vue'
     import CertificationsTable from '@/components/CertificationsTable.vue'
     import PrintButton from '@/components/PrintButton.vue'
+    import ReferenceList from '@/components/ReferenceList.vue'
     import { storeKey } from '@/store'
     import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
     import { useStore } from 'vuex'
@@ -62,13 +65,17 @@
             PrintButton,
             Terminal,
             Dialog,
-            Button
+            Button,
+            ReferenceList
         },
         setup() {
             const store = useStore(storeKey)
             const showTerminal = ref(false)
             const showPrintDialog = ref(false)
             const profile = computed(() => store.state.profileDetails)
+            const prompt = ref('guest >')
+            
+            let startLogin = false
 
             onMounted(() => {
                 TerminalService.on('command', commandHandler)
@@ -79,7 +86,6 @@
             })
 
             const commandHandler = (text: string) => {
-                let response
                 let argsIndex = text.indexOf(' ')
                 let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text
 
@@ -87,15 +93,21 @@
                 case 'exit':
                     showTerminal.value = false
                     break
-                case 'refs':
-                    response = 'Populating references ...'
+                case 'login':
+                    startLogin = true
+                    TerminalService.emit('response', 'Enter credentials')
                     break
-
+                case 'refs':
+                    TerminalService.emit('response', 'todo')
+                    break
                 default:
-                    response = 'Unknown command: ' + command
+                    if (startLogin) {
+                        // TODO: make this actually work
+                        TerminalService.emit('response', 'logging in ...')
+                    } else {
+                        TerminalService.emit('response', 'Unknown command: ' + command)
+                    }
                 }
-                
-                TerminalService.emit('response', response)
             }
             
             window.onkeyup = (e) => {
@@ -109,6 +121,7 @@
                 showTerminal,
                 commandHandler,
                 showPrintDialog,
+                prompt,
                 handlePrint: () => {
                     showPrintDialog.value = true
                 },

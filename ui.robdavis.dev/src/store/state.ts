@@ -4,6 +4,7 @@ import GitHubUser from '@/models/github-user'
 import Hobby from '@/models/hobby'
 import Job from '@/models/job'
 import ProfileDetails from '@/models/profile.details'
+import { Reference } from '@/models/reference'
 import Skill from '@/models/skill'
 import Social from '@/models/social'
 
@@ -15,5 +16,6 @@ export default interface State {
     hobbies: Hobby[],
     jobs: Job[],
     certifications: Certification[],
-    educations: Education[]
+    educations: Education[],
+    references: Reference[]
 }

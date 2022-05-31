@@ -17,7 +17,8 @@ export const store = createStore<State>({
       hobbies: [],
       jobs: [],
       certifications: [],
-      educations: []
+      educations: [],
+      references: []
   },
   getters: {
   },
@@ -52,6 +53,10 @@ export const store = createStore<State>({
 
       setEducations: (state, eds): void => {
           state.educations = eds
+      },
+
+      setReferences: (state, refs): void => {
+          state.references = refs
       }
   },
   actions: {
@@ -101,6 +106,12 @@ export const store = createStore<State>({
           const service = new ProfileService()
           const eds = await service.Educations()
           commit('setEducations', eds)
+      },
+
+      loadReferences: async ( { commit }): Promise<void> => {
+          const service = new ProfileService()
+          const refs = await service.References()
+          commit('setReferences', refs)
       }
   },
   modules: {

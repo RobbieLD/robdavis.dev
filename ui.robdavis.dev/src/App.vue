@@ -22,7 +22,8 @@
                     store.dispatch('loadHobbies'),
                     store.dispatch('loadJobs'),
                     store.dispatch('loadCerts'),
-                    store.dispatch('loadEducations')])
+                    store.dispatch('loadEducations'),
+                    store.dispatch('loadReferences')])
                     .catch((e: Error) => {
                         toast.add({severity:'error', summary: e.name, detail:e.message, life: 3000})
                     })
@@ -52,7 +53,6 @@
     }
 
     * {
-        color-adjust: exact !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }

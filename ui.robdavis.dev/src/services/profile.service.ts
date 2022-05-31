@@ -8,6 +8,7 @@ import Social from '@/models/social'
 import BaseService from './base.service'
 import { Certification, CertificationResponse } from '@/models/certification'
 import { Education, EducationResponse } from '@/models/education'
+import { Reference, ReferenceResponse } from '@/models/reference'
 
 export default class ProfileService extends BaseService {
     private readonly imageBaseUrl = process.env?.VUE_APP_PROFILE_SERVICE_URL
@@ -49,5 +50,10 @@ export default class ProfileService extends BaseService {
     public async Educations(): Promise<Education[]> {
         const results = await this.http.get<BaseResponseCollection<EducationResponse>>('educations?populate=*')
         return results.data.data.map(x => new Education(x.attributes, this.imageBaseUrl)).sort((a, b) => b.Year - a.Year)
+    }
+
+    public async References(): Promise<Reference[]> {
+        const results = await this.http.get<BaseResponseCollection<ReferenceResponse>>('references?populate=*')
+        return results.data.data.map(x => new Reference(x.attributes, this.imageBaseUrl)).sort((a, b) => a.Order - b.Order)
     }
 }
