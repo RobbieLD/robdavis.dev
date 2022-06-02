@@ -18,7 +18,8 @@ export const store = createStore<State>({
       jobs: [],
       certifications: [],
       educations: [],
-      references: []
+      references: [],
+      jwt: ''
   },
   getters: {
   },
@@ -57,9 +58,19 @@ export const store = createStore<State>({
 
       setReferences: (state, refs): void => {
           state.references = refs
+      },
+
+      setJwt: (state, jwt): void => {
+        state.jwt = jwt
       }
   },
   actions: {
+      authenticate: async ({ commit }, payload: { username: string, password: string}): Promise<void> => {
+          const service = new ProfileService()
+          const result = await service.Login(payload.username, payload.password)
+          commit('setJwt', result)
+      },
+
       loadGitHubUser: async ({ commit }): Promise<void> => {
           const service = new GitHubService()
           const user = await service.Profile(process.env?.VUE_APP_GITHUB_USERNAME)
@@ -108,9 +119,9 @@ export const store = createStore<State>({
           commit('setEducations', eds)
       },
 
-      loadReferences: async ( { commit }): Promise<void> => {
+      loadReferences: async ( { commit }, jwt: string): Promise<void> => {
           const service = new ProfileService()
-          const refs = await service.References()
+          const refs = await service.References(jwt)
           commit('setReferences', refs)
       }
   },

@@ -17,5 +17,6 @@ export default interface State {
     jobs: Job[],
     certifications: Certification[],
     educations: Education[],
-    references: Reference[]
+    references: Reference[],
+    jwt: string
 }

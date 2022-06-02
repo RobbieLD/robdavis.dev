@@ -1,14 +1,19 @@
 <template>
   <router-view />
+  <Toast />
 </template>
 <script lang="ts">
     import { defineComponent, onMounted } from 'vue'
     import { useStore } from 'vuex'
     import { storeKey } from './store'
     import { useToast } from 'primevue/usetoast'
+    import Toast from 'primevue/toast'
 
     export default defineComponent({
         name: 'App',
+        components: {
+            Toast
+        },
         setup() {
             const toast = useToast()
             const store = useStore(storeKey)
@@ -22,8 +27,7 @@
                     store.dispatch('loadHobbies'),
                     store.dispatch('loadJobs'),
                     store.dispatch('loadCerts'),
-                    store.dispatch('loadEducations'),
-                    store.dispatch('loadReferences')])
+                    store.dispatch('loadEducations')])
                     .catch((e: Error) => {
                         toast.add({severity:'error', summary: e.name, detail:e.message, life: 3000})
                     })

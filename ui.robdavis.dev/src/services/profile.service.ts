@@ -17,6 +17,15 @@ export default class ProfileService extends BaseService {
         super(process.env?.VUE_APP_PROFILE_SERVICE_URL + '/api/')
     }
 
+    public async Login(username: string, password: string): Promise<string> {
+        const result = await this.http.post<{jwt: string}>('auth/local',{
+            identifier: username,
+            password
+        })
+        
+        return result.data.jwt
+    }
+
     public async Details(): Promise<ProfileDetails> {
         const results = await this.http.get<BaseResponse<ProfileDetails>>('profile')
         return results.data.data.attributes
@@ -52,8 +61,12 @@ export default class ProfileService extends BaseService {
         return results.data.data.map(x => new Education(x.attributes, this.imageBaseUrl)).sort((a, b) => b.Year - a.Year)
     }
 
-    public async References(): Promise<Reference[]> {
-        const results = await this.http.get<BaseResponseCollection<ReferenceResponse>>('references?populate=*')
+    public async References(jwt: string): Promise<Reference[]> {
+        const results = await this.http.get<BaseResponseCollection<ReferenceResponse>>('references?populate=*', {
+            headers: {
+              Authorization:
+                `Bearer ${jwt}`
+            }})
         return results.data.data.map(x => new Reference(x.attributes, this.imageBaseUrl)).sort((a, b) => a.Order - b.Order)
     }
 }

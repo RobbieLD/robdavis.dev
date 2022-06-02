@@ -6,7 +6,6 @@
         <certifications-table></certifications-table>
 	</div>
 	<div class="main-content">
-        <Terminal welcomeMessage="Welcome to admin mode" :prompt="prompt" v-if="showTerminal" class="terminal" />
         <content-section icon="comment" caption="Introduction">
             {{ profile.About }}
         </content-section>
@@ -16,7 +15,7 @@
         <content-section icon="camera" caption="Hobbies">
             <hobby-collection></hobby-collection>
         </content-section>
-        <content-section icon="address-book" caption="References" class="page__one">
+        <content-section v-if="token" icon="address-book" caption="References" class="page__one">
             <reference-list></reference-list>
         </content-section>
         <content-section icon="building" class="page__two" caption="Roles">
@@ -24,8 +23,21 @@
         </content-section>
     </div>
     <print-button @click="handlePrint"></print-button>
+    <Dialog header="Login" v-model:visible="showLogin" :modal="true">
+        <span class="p-float-label">
+            <InputText id="username" type="text" v-model="username" />
+            <label for="username">Username</label>
+        </span>
+        <span class="p-float-label">
+            <InputText id="password" type="password" v-model="password" />
+            <label for="password">Password</label>
+        </span>
+        <template #footer>
+            <Button :label="loggingIn ? 'Logging In ...' : 'Login'" @click="login" :disabled="loggingIn"></Button>
+        </template>
+    </Dialog>
     <Dialog header="Recommended Print Settings" v-model:visible="showPrintDialog" :modal="true">
-    <img src="../../public/print-settings.png" class="print-settings" />
+        <img src="../../public/print-settings.png" class="print-settings" />
         <template #footer>
             <Button label="Print" @click="print"></Button>
         </template>
@@ -43,11 +55,11 @@
     import CertificationsTable from '@/components/CertificationsTable.vue'
     import PrintButton from '@/components/PrintButton.vue'
     import ReferenceList from '@/components/ReferenceList.vue'
+    import InputText from 'primevue/inputtext'
     import { storeKey } from '@/store'
-    import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
+    import { computed, defineComponent, ref } from 'vue'
     import { useStore } from 'vuex'
-    import Terminal from 'primevue/terminal'
-    import TerminalService from 'primevue/terminalservice'
+    import { useToast } from 'primevue/usetoast'
     import Dialog from 'primevue/dialog'
     import Button from 'primevue/button'
 
@@ -63,65 +75,60 @@
             EducationInstitutions,
             RolesHistory,
             PrintButton,
-            Terminal,
             Dialog,
             Button,
-            ReferenceList
+            ReferenceList,
+            InputText
         },
         setup() {
+            const toast = useToast()
+            const showLogin = ref(false)
+            const username = ref('')
+            const password = ref('')
             const store = useStore(storeKey)
-            const showTerminal = ref(false)
             const showPrintDialog = ref(false)
             const profile = computed(() => store.state.profileDetails)
-            const prompt = ref('guest >')
-            
-            let startLogin = false
+            const loggingIn = ref(false)
+            const token = computed(() => store.state.jwt)
 
-            onMounted(() => {
-                TerminalService.on('command', commandHandler)
-            })
+            const login = async () => {
+                loggingIn.value = true
 
-            onBeforeUnmount(() => {
-                TerminalService.off('command', commandHandler)
-            })
+                try {
+                    await store.dispatch('authenticate', {
+                        username: username.value,
+                        password: password.value
+                    })
+                    
+                    await store.dispatch('loadReferences', store.state.jwt)
+                    showLogin.value = false
+                    toast.add({severity:'info', summary: 'Logged In', detail: 'You have now logged in, the references are now populating', life: 3000})
 
-            const commandHandler = (text: string) => {
-                let argsIndex = text.indexOf(' ')
-                let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text
-
-                switch(command) {
-                case 'exit':
-                    showTerminal.value = false
-                    break
-                case 'login':
-                    startLogin = true
-                    TerminalService.emit('response', 'Enter credentials')
-                    break
-                case 'refs':
-                    TerminalService.emit('response', 'todo')
-                    break
-                default:
-                    if (startLogin) {
-                        // TODO: make this actually work
-                        TerminalService.emit('response', 'logging in ...')
-                    } else {
-                        TerminalService.emit('response', 'Unknown command: ' + command)
-                    }
+                } catch (e) {
+                    console.log('error caught')
+                    toast.add({severity:'error', summary: (e as Error).name, detail:(e as Error).message, life: 3000})
+                    console.error(e)
+                } finally {
+                    loggingIn.value = false
                 }
             }
             
             window.onkeyup = (e) => {
-                if (e.altKey && e.key === 't') {
-                    showTerminal.value = true
+                if (e.altKey && e.key === 'l') {
+                    showLogin.value = true
                 }
             }
 
             return {
                 profile,
-                showTerminal,
-                commandHandler,
                 showPrintDialog,
                 prompt,
+                login,
+                loggingIn,
+                showLogin,
+                username,
+                password,
+                token,
                 handlePrint: () => {
                     showPrintDialog.value = true
                 },
@@ -137,6 +144,11 @@
     })
 </script>
 <style lang="scss">
+
+    .p-float-label {
+        margin-bottom: 0.5em;
+    }
+
     .side-bar {
         grid-column: 1;
         background-color: var(--primary-color);
