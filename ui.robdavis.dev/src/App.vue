@@ -1,37 +1,43 @@
 <template>
-  <router-view />
+  <router-view v-if="modulesLoaded == 8" />
+  <ProgressBar :value="progress" class="loading" v-if="modulesLoaded < 8" />
   <Toast />
 </template>
 <script lang="ts">
-    import { defineComponent, onMounted } from 'vue'
+    import { computed, defineComponent, onMounted, ref } from 'vue'
     import { useStore } from 'vuex'
     import { storeKey } from './store'
     import { useToast } from 'primevue/usetoast'
     import Toast from 'primevue/toast'
+    import ProgressBar from 'primevue/progressbar'
 
     export default defineComponent({
         name: 'App',
         components: {
-            Toast
+            Toast,
+            ProgressBar
         },
         setup() {
-            const toast = useToast()
             const store = useStore(storeKey)
+            const loading = ref(true)
+            const modulesLoaded = ref(0)
+            const progress = computed(() => (modulesLoaded.value / 8) * 100)
 
             onMounted(() => {
-                Promise.all([
-                    store.dispatch('loadGitHubUser'),
-                    store.dispatch('loadProfile'),
-                    store.dispatch('loadSocials'),
-                    store.dispatch('loadSkills'),
-                    store.dispatch('loadHobbies'),
-                    store.dispatch('loadJobs'),
-                    store.dispatch('loadCerts'),
-                    store.dispatch('loadEducations')])
-                    .catch((e: Error) => {
-                        toast.add({severity:'error', summary: e.name, detail:e.message, life: 3000})
-                    })
+                store.dispatch('loadGitHubUser').then(() => modulesLoaded.value++)
+                store.dispatch('loadProfile').then(() => modulesLoaded.value++)
+                store.dispatch('loadSocials').then(() => modulesLoaded.value++)
+                store.dispatch('loadSkills').then(() => modulesLoaded.value++)
+                store.dispatch('loadHobbies').then(() => modulesLoaded.value++)
+                store.dispatch('loadJobs').then(() => modulesLoaded.value++)
+                store.dispatch('loadCerts').then(() => modulesLoaded.value++)
+                store.dispatch('loadEducations').then(() => modulesLoaded.value++)
             })
+
+            return {
+                modulesLoaded,
+                progress
+            }
         }
     })
 </script>
@@ -72,6 +78,20 @@
             height: 297mm;
         }
     }
+
+    .loading {
+        width: 100vw;
+    }
+
+    .p-progressbar {
+        border-radius: 0 !important;
+    }
+
+    .p-progressbar-value {
+        background-color: var(--secondary-color) !important;
+    }
+
+    
 
   #app {
       display: grid;
