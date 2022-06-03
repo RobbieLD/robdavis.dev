@@ -7,7 +7,6 @@
     import { computed, defineComponent, onMounted, ref } from 'vue'
     import { useStore } from 'vuex'
     import { storeKey } from './store'
-    import { useToast } from 'primevue/usetoast'
     import Toast from 'primevue/toast'
     import ProgressBar from 'primevue/progressbar'
 
@@ -19,7 +18,6 @@
         },
         setup() {
             const store = useStore(storeKey)
-            const loading = ref(true)
             const modulesLoaded = ref(0)
             const progress = computed(() => (modulesLoaded.value / 8) * 100)
 

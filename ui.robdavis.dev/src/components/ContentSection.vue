@@ -33,6 +33,10 @@
         margin-bottom: 2em;
         margin-right: 2.5em;
 
+        &:nth-last-child(2) {
+            page-break-after: always;
+        }
+
         &:first-of-type {
             margin-top:0.5em;
         }
@@ -65,6 +69,13 @@
     @media print {
         .content-section {
             margin-top: 0.5em;
+
+            &:last-child {
+                margin-left: -25em;
+                .content-section__heading {
+                    display: none;
+                }
+            }
         }
     }
 

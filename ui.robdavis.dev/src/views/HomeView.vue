@@ -15,14 +15,14 @@
         <content-section icon="camera" caption="Hobbies">
             <hobby-collection></hobby-collection>
         </content-section>
-        <content-section v-if="token" icon="address-book" caption="References" class="page__one">
+        <content-section v-if="token" icon="address-book" caption="References">
             <reference-list></reference-list>
         </content-section>
-        <content-section icon="building" class="page__two" caption="Roles">
+        <content-section icon="building" caption="Roles">
             <roles-history></roles-history>
         </content-section>
     </div>
-    <print-button @click="handlePrint"></print-button>
+    <print-button @click="print"></print-button>
     <Dialog header="Login" v-model:visible="showLogin" :modal="true">
         <span class="p-float-label">
             <InputText id="username" type="text" v-model="username" />
@@ -34,12 +34,6 @@
         </span>
         <template #footer>
             <Button :label="loggingIn ? 'Logging In ...' : 'Login'" @click="login" :disabled="loggingIn"></Button>
-        </template>
-    </Dialog>
-    <Dialog header="Recommended Print Settings" v-model:visible="showPrintDialog" :modal="true">
-        <img src="../../public/print-settings.png" class="print-settings" />
-        <template #footer>
-            <Button label="Print" @click="print"></Button>
         </template>
     </Dialog>
 </template>
@@ -86,7 +80,6 @@
             const username = ref('')
             const password = ref('')
             const store = useStore(storeKey)
-            const showPrintDialog = ref(false)
             const profile = computed(() => store.state.profileDetails)
             const loggingIn = ref(false)
             const token = computed(() => store.state.jwt)
@@ -121,7 +114,6 @@
 
             return {
                 profile,
-                showPrintDialog,
                 prompt,
                 login,
                 loggingIn,
@@ -129,15 +121,8 @@
                 username,
                 password,
                 token,
-                handlePrint: () => {
-                    showPrintDialog.value = true
-                },
                 print: () => {
-                    showPrintDialog.value = false
-                    // This gives the dialog time to hide before the print function is called
-                    setTimeout(() => {
-                        window.print()
-                    }, 300)
+                    window.print()
                 }
             }
         }
@@ -172,22 +157,11 @@
             display: initial;
         }
 
-        .page__two {
-            margin-left: -25em;
-        }
-
-        .page__two .content-section__heading {
-            display: none;
-        }
     }
 
     .main-content {
         grid-column: 2;
         margin-top: 2em;
-    }
-
-    .page__one {
-        page-break-after: always;
     }
 
     .print-settings {
