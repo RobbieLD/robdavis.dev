@@ -91,9 +91,15 @@
 
     
 
-  #app {
+    #app {
       display: grid;
       grid-template-columns: 22em 1fr;
       border-left: var(--secondary-color) 2em solid;
+    }
+
+    @media only screen and (max-width: 800px) {
+        #app {
+            grid-template-columns: 1fr;
+        }
     }
 </style>

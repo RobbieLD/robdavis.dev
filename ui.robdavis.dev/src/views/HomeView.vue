@@ -185,4 +185,15 @@
             color: var(--secondary-color) !important;
         }
     }
+
+    @media only screen and (max-width: 800px) {
+        .main-content {
+            grid-column: 1;
+        }
+
+        .side-bar {
+            height: initial;
+            position: initial;
+        }
+    }
 </style>
