@@ -40,9 +40,7 @@
 </script>
 <style lang="scss">
     .cert-table {
-        margin-left: 2em;
-        margin-top: 2em;
-        margin-right: 2em;
+        margin: 2em;
 
         &__header {
             display: grid;

@@ -1,10 +1,10 @@
 <template>
-	<div class="side-bar hidden">
-		<profile-avatar></profile-avatar>
-		<social-media></social-media>
+    <div class="side-bar hidden">
+        <profile-avatar></profile-avatar>
+        <social-media></social-media>
         <skill-set></skill-set>
         <certifications-table></certifications-table>
-	</div>
+    </div>
 	<div class="main-content">
         <content-section icon="comment" caption="Introduction">
             {{ profile.About }}
@@ -138,7 +138,9 @@
         grid-column: 1;
         background-color: var(--primary-color);
         height: 100vh;
+        width: 22em;
         position: fixed;
+        overflow-y: auto;
     }
 
     .history {
@@ -194,6 +196,8 @@
         .side-bar {
             height: initial;
             position: initial;
+            justify-self: center;
+            width: 100%;
         }
     }
 </style>

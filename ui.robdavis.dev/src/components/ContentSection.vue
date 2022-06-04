@@ -41,6 +41,12 @@
             margin-top:0.5em;
         }
 
+        &:last-of-type {
+            .content {
+                margin-left: 0;
+            }
+        }
+
         &__heading {
             display: grid;
             grid-template-columns: min-content;
@@ -71,7 +77,7 @@
             margin-top: 0.5em;
 
             &:last-child {
-                margin-left: -25em;
+                margin-left: -23em;
                 .content-section__heading {
                     display: none;
                 }

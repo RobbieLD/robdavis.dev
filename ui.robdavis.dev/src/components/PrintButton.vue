@@ -27,14 +27,14 @@
         right: 0;
         border-top-left-radius: 0.5em;
         border-bottom-left-radius: 0.5em;
-        color: var(--primary-color-text);
-        background-color: var(--primary-color);
+        color: var(--secondary-color-text);
+        background-color: var(--secondary-color);
         padding: 1em;
         box-shadow: 5px 10px 18px #0000006b;
         cursor: pointer;
 
         &:hover {
-            color: var(--secondary-color);
+            color: var(--primary-color);
         }
 
         &__icon {
