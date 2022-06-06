@@ -1,6 +1,7 @@
 <template>
   <router-view v-if="modulesLoaded == 8" />
   <ProgressBar :value="progress" class="loading" v-if="modulesLoaded < 8" />
+  <div class="wait" v-if="modulesLoaded < 8">One moment while we wake up the Heroku Dyno...</div>
   <Toast />
 </template>
 <script lang="ts">
@@ -21,15 +22,19 @@
             const modulesLoaded = ref(0)
             const progress = computed(() => (modulesLoaded.value / 8) * 100)
 
-            onMounted(() => {
-                store.dispatch('loadGitHubUser').then(() => modulesLoaded.value++)
-                store.dispatch('loadProfile').then(() => modulesLoaded.value++)
-                store.dispatch('loadSocials').then(() => modulesLoaded.value++)
-                store.dispatch('loadSkills').then(() => modulesLoaded.value++)
-                store.dispatch('loadHobbies').then(() => modulesLoaded.value++)
-                store.dispatch('loadJobs').then(() => modulesLoaded.value++)
-                store.dispatch('loadCerts').then(() => modulesLoaded.value++)
-                store.dispatch('loadEducations').then(() => modulesLoaded.value++)
+            onMounted(() => {                
+                [
+                    store.dispatch('loadGitHubUser'),
+                    store.dispatch('loadProfile'),
+                    store.dispatch('loadSocials'),
+                    store.dispatch('loadSkills'),
+                    store.dispatch('loadHobbies'),
+                    store.dispatch('loadJobs'),
+                    store.dispatch('loadCerts'),
+                    store.dispatch('loadEducations')
+                ].forEach(p => p.then(() => {
+                    modulesLoaded.value++
+                }))
             })
 
             return {
@@ -89,7 +94,13 @@
         background-color: var(--secondary-color) !important;
     }
 
-    
+    .wait {
+        color: var(--dark-grey);
+        position: fixed;
+        top: 30%;
+        width: 100%;
+        text-align: center;
+    }
 
     #app {
       display: grid;
