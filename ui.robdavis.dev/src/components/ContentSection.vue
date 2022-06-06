@@ -33,8 +33,18 @@
         margin-bottom: 2em;
         margin-right: 2.5em;
 
+        &:nth-last-child(2) {
+            page-break-after: always;
+        }
+
         &:first-of-type {
             margin-top:0.5em;
+        }
+
+        &:last-of-type {
+            .content {
+                margin-left: 0;
+            }
         }
 
         &__heading {
@@ -65,6 +75,13 @@
     @media print {
         .content-section {
             margin-top: 0.5em;
+
+            &:last-child {
+                margin-left: -23em;
+                .content-section__heading {
+                    display: none;
+                }
+            }
         }
     }
 

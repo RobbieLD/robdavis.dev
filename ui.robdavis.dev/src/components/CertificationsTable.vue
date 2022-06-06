@@ -40,9 +40,7 @@
 </script>
 <style lang="scss">
     .cert-table {
-        margin-left: 2em;
-        margin-top: 2em;
-        margin-right: 2em;
+        margin: 2em;
 
         &__header {
             display: grid;
@@ -85,7 +83,6 @@
 
         &__divider {
             height: 0.1em;
-            width: 18em;
             margin-bottom: 0.5em;
             background: var(--primary-color-text);
             background: linear-gradient(90deg, var(--primary-color-text-transparent) 0%, var(--primary-color-text) 20%, var(--primary-color-text) 80%, var(--primary-color-text-transparent) 100%);
