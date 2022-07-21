@@ -78,6 +78,8 @@
 
             &:last-child {
                 margin-left: -23em;
+                height: 100%;
+                overflow: hidden;
                 .content-section__heading {
                     display: none;
                 }
