@@ -51,6 +51,9 @@
     },
     "Order": {
       "type": "integer"
+    },
+    "LongDescription": {
+      "type": "text"
     }
   }
 }
