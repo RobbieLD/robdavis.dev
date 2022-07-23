@@ -44,5 +44,9 @@
         @media print {
             display: none;   
         }
+
+        @media (max-width: 960px) {
+            display: none;
+        }
     }
 </style>

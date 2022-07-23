@@ -15,7 +15,8 @@
                 </div>
                 <div class="roles__description">
                     <span class="roles__role">{{ slotProps.item.Role }}: </span>
-                    <span v-html="slotProps.item.Description"></span>
+                    <span class="roles__description--short" v-html="slotProps.item.Description"></span>
+                    <span class="roles__description--long" v-html="slotProps.item.LongDescription"></span>
                 </div>
                 <div class="roles__techs">
                     <img v-for="(tech, index) of slotProps.item.Technologies" :key="index" :src="tech.url" :title="tech.alternativeText" :alt="tech.alternativeText" class="roles__tech"/>
@@ -73,6 +74,20 @@
 
         &__description {
             margin-top: 0.5em;
+
+            &--short {
+                display: none;
+            }
+
+            @media print {
+                &--short {
+                    display: initial;
+                }
+
+                &--long {
+                    display: none;
+                }
+            }
         }
 
         &__years {

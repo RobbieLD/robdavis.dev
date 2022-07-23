@@ -7,7 +7,7 @@
     </div>
 	<div class="main-content">
         <content-section icon="comment" caption="Introduction">
-            {{ profile.About }}
+            {{ about(profile.About) }}
         </content-section>
         <content-section icon="user-graduate" caption="Education">
             <education-institutions></education-institutions>
@@ -56,6 +56,7 @@
     import { useToast } from 'primevue/usetoast'
     import Dialog from 'primevue/dialog'
     import Button from 'primevue/button'
+    import * as converter from 'number-to-words'
 
     export default defineComponent({
         name: 'HomeView',
@@ -112,6 +113,12 @@
                 }
             }
 
+            const about = (about: string): string => {
+                const year = new Date().getFullYear() - 2008
+                const words = converter.toWords(year)
+                return about.replace('{{career}}', words)
+            }
+
             return {
                 profile,
                 prompt,
@@ -123,7 +130,8 @@
                 token,
                 print: () => {
                     window.print()
-                }
+                },
+                about
             }
         }
     })

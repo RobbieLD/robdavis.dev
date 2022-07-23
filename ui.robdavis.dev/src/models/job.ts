@@ -7,6 +7,7 @@ export interface JobResponse {
     End: number
     Role: string
     Description: string
+    LongDescription:string
     Order: number
     Logo: BaseResponse<Image>
     Technologies: BaseResponseCollection<Image>
@@ -18,6 +19,7 @@ export default class Job {
     End: number
     Role: string
     Description: string
+    LongDescription: string
     Order: number
     Logo: Image
     Technologies: Image[]
@@ -29,6 +31,7 @@ export default class Job {
         this.Description = response.Description
         this.Role = response.Role
         this.Order = response.Order
+        this.LongDescription = response.LongDescription
         this.Logo = new Image(response.Logo.data.attributes.alternativeText, baseURl + response.Logo.data.attributes.url)
         this.Technologies = response.Technologies.data?.map(t => new Image(t.attributes.alternativeText, baseURl + t.attributes.url))
     }
