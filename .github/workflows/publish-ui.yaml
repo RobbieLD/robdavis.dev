@@ -18,11 +18,11 @@ jobs:
 
       - name: Install all dependencies
         working-directory: ./ui.robdavis.dev
-        run: npm install
+        run: yarn install
       
       - name: Build
         working-directory: ./ui.robdavis.dev
-        run: npm run build
+        run: yarn run build
         env:
           VUE_APP_GITHUB_USERNAME: ${{ secrets.VUE_APP_GITHUB_USERNAME }}
           VUE_APP_PROFILE_SERVICE_URL: ${{ secrets.VUE_APP_PROFILE_SERVICE_URL }}
