@@ -127,6 +127,7 @@
 
             .p-timeline-event-opposite {
                 flex: 0;
+                padding: 0 !important;
             }
 
             .p-card {

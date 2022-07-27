@@ -91,4 +91,16 @@
         margin-top: 1em;
         margin-left: 1.5em;
     }
+
+    @media only screen and (max-width: 800px) {
+        .content {
+            margin-left: 0; 
+            margin-right: 0;
+        }
+
+        .content-section {
+            margin-left: 0.5em; 
+            margin-right: 0.5em;
+        }
+    }
 </style>
