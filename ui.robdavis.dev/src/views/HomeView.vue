@@ -15,8 +15,9 @@
         <content-section icon="camera" caption="Hobbies">
             <hobby-collection></hobby-collection>
         </content-section>
-        <content-section v-if="token" icon="address-book" caption="References">
-            <reference-list></reference-list>
+        <content-section icon="address-book" caption="References">
+            <reference-list v-if="token"></reference-list>
+            <div v-else><i>References Available on Request</i></div>
         </content-section>
         <content-section icon="building" caption="Roles">
             <roles-history></roles-history>
