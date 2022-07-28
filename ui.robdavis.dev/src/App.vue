@@ -1,29 +1,28 @@
 <template>
-  <router-view v-if="modulesLoaded == 8" />
-  <ProgressBar :value="progress" class="loading" v-if="modulesLoaded < 8" />
-  <div class="wait" v-if="modulesLoaded < 8">One moment while we wake up the Heroku Dyno...</div>
+  <router-view v-if="modulesLoaded" />
+  <ProgressSpinner class="loading" v-if="!modulesLoaded"></ProgressSpinner>
   <Toast />
 </template>
 <script lang="ts">
-    import { computed, defineComponent, onMounted, ref } from 'vue'
+    import { defineComponent, onMounted, ref } from 'vue'
     import { useStore } from 'vuex'
     import { storeKey } from './store'
     import Toast from 'primevue/toast'
-    import ProgressBar from 'primevue/progressbar'
+    import ProgressSpinner from 'primevue/progressspinner'
 
     export default defineComponent({
         name: 'App',
         components: {
             Toast,
-            ProgressBar
+            ProgressSpinner
         },
         setup() {
             const store = useStore(storeKey)
-            const modulesLoaded = ref(0)
-            const progress = computed(() => (modulesLoaded.value / 8) * 100)
-
-            onMounted(() => {                
-                [
+            const modulesLoaded = ref(false)
+            
+            
+            onMounted(() => {
+                Promise.all([
                     store.dispatch('loadGitHubUser'),
                     store.dispatch('loadProfile'),
                     store.dispatch('loadSocials'),
@@ -32,14 +31,13 @@
                     store.dispatch('loadJobs'),
                     store.dispatch('loadCerts'),
                     store.dispatch('loadEducations')
-                ].forEach(p => p.then(() => {
-                    modulesLoaded.value++
-                }))
+                ]).then(() => {
+                    modulesLoaded.value = true
+                })
             })
 
             return {
-                modulesLoaded,
-                progress
+                modulesLoaded
             }
         }
     })
@@ -83,7 +81,10 @@
     }
 
     .loading {
-        width: 100vw;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
     }
 
     .p-progressbar {
@@ -111,6 +112,16 @@
     @media only screen and (max-width: 800px) {
         #app {
             grid-template-columns: 1fr;
+        }
+    }
+
+    @keyframes p-progress-spinner-color {
+        100%,
+        0% {
+            stroke: var(--primary-color);
+        }
+        90% {
+            stroke: var(--secondary-color);
         }
     }
 </style>
