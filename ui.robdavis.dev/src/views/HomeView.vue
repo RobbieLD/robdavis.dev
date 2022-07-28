@@ -23,7 +23,7 @@
             <roles-history></roles-history>
         </content-section>
     </div>
-    <print-button @click="print"></print-button>
+    <print-button @click="print" v-if="isChrome"></print-button>
     <Dialog header="Login" v-model:visible="showLogin" :modal="true">
         <span class="p-float-label">
             <InputText id="username" type="text" v-model="username" />
@@ -132,7 +132,8 @@
                 print: () => {
                     window.print()
                 },
-                about
+                about,
+                isChrome:!!window.chrome
             }
         }
     })
