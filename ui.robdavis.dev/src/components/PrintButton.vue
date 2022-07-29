@@ -1,6 +1,6 @@
 <template>
     <div class="action-button" @click="print">
-        <i class="pi action-button__icon pi-print" ></i>
+        <i class="pi action-button__icon pi-download" ></i>
     </div>
 </template>
 <script lang='ts'>
@@ -45,8 +45,8 @@
             display: none;   
         }
 
-        @media (max-width: 960px) {
-            display: none;
-        }
+        // @media (max-width: 960px) {
+        //     display: none;
+        // }
     }
 </style>

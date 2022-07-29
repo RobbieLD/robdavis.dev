@@ -77,7 +77,8 @@
             margin-top: 0.5em;
 
             &:last-child {
-                margin-left: -23em;
+                margin-left: -21em;
+                padding-left: 0.5em;
                 height: 100%;
                 overflow: hidden;
                 .content-section__heading {

@@ -23,7 +23,7 @@
             <roles-history></roles-history>
         </content-section>
     </div>
-    <print-button @click="print" v-if="isChrome"></print-button>
+    <print-button @click="download"></print-button>
     <Dialog header="Login" v-model:visible="showLogin" :modal="true">
         <span class="p-float-label">
             <InputText id="username" type="text" v-model="username" />
@@ -129,11 +129,10 @@
                 username,
                 password,
                 token,
-                print: () => {
-                    window.print()
+                download: () => {
+                    window.open('https://github.com/RobbieLD/robdavis.dev/raw/master/render/Rob%20Davis%20-%20CV.pdf')
                 },
-                about,
-                isChrome:!!window.chrome
+                about
             }
         }
     })
