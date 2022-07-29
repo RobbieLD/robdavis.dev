@@ -1,6 +1,6 @@
 <template>
   <router-view v-if="modulesLoaded" />
-  <ProgressSpinner class="loading" v-if="!modulesLoaded"></ProgressSpinner>
+  <ProgressSpinner class="loading" v-else></ProgressSpinner>
   <Toast />
 </template>
 <script lang="ts">
