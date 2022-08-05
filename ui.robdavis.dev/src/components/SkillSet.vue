@@ -3,12 +3,12 @@
         <div class="skill-set__header">
             <font-awesome-layers class="skill-set__icon skill-set__icon--left">
                 <font-awesome-icon icon="circle" />
-                <font-awesome-icon icon="chevron-left" class="skill-set__icon--symbol" transform="shrink-7" />
+                <font-awesome-icon icon="code" class="skill-set__icon--symbol" transform="shrink-7" />
             </font-awesome-layers>
             <div class="skill-set__title">Core Skills</div>
             <font-awesome-layers class="skill-set__icon">
                 <font-awesome-icon icon="circle" />
-                <font-awesome-icon icon="chevron-right" class="skill-set__icon--symbol" transform="shrink-7" />
+                <font-awesome-icon icon="code" class="skill-set__icon--symbol" transform="shrink-7" />
             </font-awesome-layers>
         </div>
         <div class="skill-set__divider"></div>
@@ -60,6 +60,7 @@
 
             &--symbol {
                 color: var(--secondary-color-text);
+                margin-left: -0.1em !important;
             }
 
             &--left {
